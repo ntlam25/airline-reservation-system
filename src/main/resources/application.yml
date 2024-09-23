@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: Flight_reservation
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/airline
+    username: root
+    password: root
+
+app:
+  payment:
+    vnPay:
+      url: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+      tmnCode: D0N8LZE2
+      secretKey: KRBJLJWWYW5EFI9S30DYGBXUNSK851U9
+      returnUrl: http://localhost:8080/api/vnpay/vnpay-callback
+      version: 2.1.0
+      command: pay
+      orderType: airline
