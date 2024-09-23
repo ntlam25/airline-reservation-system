@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/airports")
 public class AirportController {
@@ -32,6 +34,10 @@ public class AirportController {
   @GetMapping("/{id}")
   public AirportResponse findById(@PathVariable Long id){
     return service.findById(id);
+  }
+  @GetMapping
+  public List<AirportResponse> findAll(){
+    return service.findAll();
   }
   @PutMapping("/{id}")
   public AirportResponse update(@PathVariable Long id, @RequestBody AirportRequest request){

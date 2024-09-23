@@ -6,6 +6,9 @@ import com.example.flight_reservation.dto.response.VNPayResponse;
 import com.example.flight_reservation.entity.Booking;
 import com.example.flight_reservation.service.BaseCRUDService;
 
+import java.util.List;
+
 public interface IBookingService extends BaseCRUDService<BookingRequest, BookingResponse, Booking,Long> {
-    VNPayResponse createPaymentUrl(BookingResponse response);
+    VNPayResponse createPaymentUrl(Long id);
+    List<BookingResponse> findBookingsByUserId(Long userId);
 }

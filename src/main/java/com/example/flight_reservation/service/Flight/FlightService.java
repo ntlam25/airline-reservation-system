@@ -13,6 +13,10 @@ import com.example.flight_reservation.repository.FlightRepository;
 import com.example.flight_reservation.service.AbstractCrudService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class FlightService extends AbstractCrudService<FlightRequest, FlightResponse, FlightRepository, Flight,Long> implements IFlightService {
     private final AircraftRepository aircraftRepository;
@@ -101,5 +105,25 @@ public class FlightService extends AbstractCrudService<FlightRequest, FlightResp
         response.setAirline(domainEntity.getAirline());
         response.setTransitPointList(domainEntity.getTransitPoints());
         return response;
+    }
+
+    @Override
+    public List<FlightResponse> searchFlights(String depAirport, String arrAirport, String depDate) {
+        LocalDate departureDate = LocalDate.parse(depDate);
+        List<Flight> flights = repository.findFlights(depAirport, arrAirport, departureDate);
+        List<FlightResponse> results = new ArrayList<>();
+        for( Flight f: flights){
+            results.add(toResponse(f));
+        }
+        return results;
+    }
+
+    @Override
+    public List<FlightResponse> findAll() {
+        List<FlightResponse> responses = new ArrayList<>();
+        for(Flight flight : repository.findAll()){
+            responses.add(toResponse(flight));
+        }
+        return responses;
     }
 }

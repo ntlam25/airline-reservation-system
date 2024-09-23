@@ -36,6 +36,10 @@ public class FlightController {
     public FlightResponse findById(@PathVariable Long id){
         return service.findById(id);
     }
+    @GetMapping
+    public List<FlightResponse> findAll(){
+        return service.findAll();
+    }
     @PutMapping("/{id}")
     public FlightResponse updateById(@PathVariable Long id, @RequestBody FlightRequest request){
         return service.update(id,request);
@@ -52,5 +56,14 @@ public class FlightController {
         Specification<Flight> responseSpecification = filterService
                 .getSearchSpecification(request.getSearchDetailRequest(),request.getGlobalOperator());
         return repository.findAll(responseSpecification);
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<FlightResponse>> searchFlights(
+            @RequestParam String depAirport,
+            @RequestParam String arrAirport,
+            @RequestParam String depDate) {
+
+        List<FlightResponse> flights = service.searchFlights(depAirport, arrAirport, depDate);
+        return ResponseEntity.ok(flights);
     }
 }
