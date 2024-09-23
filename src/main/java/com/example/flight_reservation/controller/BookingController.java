@@ -34,7 +34,7 @@ public class BookingController {
   @PostMapping("/add")
   public ResponseEntity<VNPayResponse> create(@RequestBody BookingRequest bookingRequest) {
     BookingResponse response = service.create(bookingRequest);
-    VNPayResponse vnPayResponse = service.createPaymentUrl(response);
+    VNPayResponse vnPayResponse = service.createPaymentUrl(response.getBookingId());
     return new ResponseEntity<>(vnPayResponse, HttpStatus.CREATED);
   }
 
@@ -42,6 +42,12 @@ public class BookingController {
   public ResponseEntity<BookingResponse> findById(@PathVariable Long bookingId) {
     BookingResponse response = service.findById(bookingId);
     return ResponseEntity.ok(response);
+  }
+
+  @GetMapping("/user/{userId}")
+  public ResponseEntity<List<BookingResponse>> findByUserId(@PathVariable Long userId){
+    List<BookingResponse> responses = service.findBookingsByUserId(userId);
+    return ResponseEntity.ok(responses);
   }
   @PostMapping("/filter")
   public List<Booking> findFlightBySpecification(@RequestBody SearchRequest request){

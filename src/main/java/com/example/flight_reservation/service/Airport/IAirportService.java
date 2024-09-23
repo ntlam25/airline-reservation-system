@@ -5,6 +5,8 @@ import com.example.flight_reservation.dto.response.AirportResponse;
 import com.example.flight_reservation.entity.Airport;
 import com.example.flight_reservation.service.BaseCRUDService;
 
-public interface IAirportService extends BaseCRUDService<AirportRequest, AirportResponse, Airport,Long> {
+import java.util.List;
 
+public interface IAirportService extends BaseCRUDService<AirportRequest, AirportResponse, Airport,Long> {
+    List<AirportResponse> findAll();
 }

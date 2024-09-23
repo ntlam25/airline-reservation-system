@@ -8,6 +8,9 @@ import com.example.flight_reservation.repository.AirportRepository;
 import com.example.flight_reservation.service.AbstractCrudService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AirportService extends AbstractCrudService<AirportRequest, AirportResponse, AirportRepository, Airport,Long> implements IAirportService {
 
@@ -45,5 +48,14 @@ public class AirportService extends AbstractCrudService<AirportRequest, AirportR
     response.setCity(domainEntity.getCity());
     response.setCountry(domainEntity.getCountry());
     return response;
+  }
+
+  @Override
+  public List<AirportResponse> findAll() {
+    List<AirportResponse> responses = new ArrayList<>();
+    for(Airport airport : repository.findAll()){
+      responses.add(toResponse(airport));
+    }
+    return responses;
   }
 }

@@ -113,9 +113,9 @@ public class BookingService extends AbstractCrudService<BookingRequest, BookingR
     return booking;
   }
   @Transactional
-  public VNPayResponse createPaymentUrl(BookingResponse response) {
-    Long totalPrice = response.getTotalPrice();
-    Booking booking = bookingRepository.findById(response.getBookingId()).orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
+  public VNPayResponse createPaymentUrl(Long bookingId) {
+    Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
+    Long totalPrice = booking.getTotalPrice();
     String paymentUrl = vnPayService.createPaymentUrl(
         booking.getBookingId(),
         totalPrice,
@@ -127,6 +127,16 @@ public class BookingService extends AbstractCrudService<BookingRequest, BookingR
     bookingRepository.save(booking);
     return new VNPayResponse(booking.getBookingId(), "Booking created successfully",BookingStatus.PENDING, paymentUrl);
   }
+
+  @Override
+  public List<BookingResponse> findBookingsByUserId(Long userId) {
+    List<BookingResponse> responses = new ArrayList<>();
+    for(Booking booking : repository.findBookingByUserUserId(userId)){
+      responses.add(toResponse(booking));
+    }
+    return responses;
+  }
+
   @Transactional
   public VNPayResponse processPaymentCallback(Map<String, String> vnpayResponse) {
       String vnp_ResponseCode = vnpayResponse.get("vnp_ResponseCode");
