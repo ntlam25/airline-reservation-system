@@ -43,6 +43,7 @@ public class UserService extends AbstractCrudService<UserRequest, UserResponse, 
     protected UserResponse toResponse(User domainEntity) {
         UserResponse response = new UserResponse();
         response.setId(domainEntity.getUserId());
+        response.setUsername(domainEntity.getUsername());
         response.setPassword(domainEntity.getPasswordHash());
         response.setEmail(domainEntity.getEmail());
         response.setFirstName(domainEntity.getFirstName());
