@@ -25,6 +25,11 @@ public class UserController {
     public UserResponse findById(@PathVariable Long id){
         return service.findById(id);
     }
+
+    @GetMapping("/search")
+    public UserResponse findByEmail(@RequestParam String email){
+        return service.findUserByEmail(email);
+    }
     @PutMapping("/{id}")
     public UserResponse updateById(@PathVariable Long id, @RequestBody UserRequest request){
         return service.update(id,request);
