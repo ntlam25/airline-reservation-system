@@ -6,4 +6,5 @@ import com.example.flight_reservation.entity.User;
 import com.example.flight_reservation.service.BaseCRUDService;
 
 public interface IUserService extends BaseCRUDService<UserRequest, UserResponse, User,Long> {
+    String verify(UserRequest user);
 }

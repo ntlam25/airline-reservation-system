@@ -8,13 +8,25 @@ import com.example.flight_reservation.exception.ResourceNotFoundException;
 import com.example.flight_reservation.repository.UserRepository;
 import com.example.flight_reservation.service.AbstractCrudService;
 
+import com.example.flight_reservation.service.JWTService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService extends AbstractCrudService<UserRequest, UserResponse, UserRepository, User,Long> implements IUserService{
-    protected UserService(UserRepository repository) {
+    protected UserService(UserRepository repository, JWTService jwtService) {
         super(repository);
+        this.jwtService = jwtService;
     }
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+    private final JWTService jwtService;
+
+    @Autowired
+    AuthenticationManager authManager;
 
     @Override
     protected User createAndSave(UserRequest request) {
@@ -23,7 +35,7 @@ public class UserService extends AbstractCrudService<UserRequest, UserResponse, 
         user.setUsername(request.getUsername());
         user.setLastName(request.getLastName());
         user.setFirstName(request.getFirstName());
-        user.setPasswordHash(request.getPassword());
+        user.setPasswordHash(encoder.encode(request.getPassword()));
         user.setPhoneNumber(request.getPhoneNumber());
         user.setRole(UserRole.CUSTOMER);
         return repository.save(user);
@@ -47,8 +59,19 @@ public class UserService extends AbstractCrudService<UserRequest, UserResponse, 
         response.setEmail(domainEntity.getEmail());
         response.setFirstName(domainEntity.getFirstName());
         response.setLastName(domainEntity.getLastName());
+        response.setUsername(domainEntity.getUsername());
         response.setRole(domainEntity.getRole());
         response.setPhoneNumber(domainEntity.getPhoneNumber());
         return response;
+    }
+
+    @Override
+    public String verify(UserRequest user) {
+        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        if (authentication.isAuthenticated()) {
+            return jwtService.generateToken(user.getUsername());
+        } else {
+            return "Login Failed";
+        }
     }
 }
