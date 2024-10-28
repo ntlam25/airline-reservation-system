@@ -6,6 +6,7 @@ import com.example.flight_reservation.dto.request.LuggageRequest;
 import com.example.flight_reservation.dto.request.PassengerRequest;
 import com.example.flight_reservation.dto.response.BookingResponse;
 import com.example.flight_reservation.dto.response.PassengerResponse;
+import com.example.flight_reservation.dto.response.UserResponse;
 import com.example.flight_reservation.dto.response.VNPayResponse;
 import com.example.flight_reservation.entity.*;
 import com.example.flight_reservation.entity.Enums.BookingStatus;
@@ -169,7 +170,7 @@ public class BookingService extends AbstractCrudService<BookingRequest, BookingR
     BookingResponse response = new BookingResponse();
     response.setBookingId(domainEntity.getBookingId());
     response.setFlightId(domainEntity.getFlight().getFlightId());
-    response.setUserId(domainEntity.getUser().getUserId());
+    response.setUser(toDTO(domainEntity.getUser()));
     response.setStatus(domainEntity.getStatus());
     response.setBookingDate(domainEntity.getBookingDate());
     response.setPassengers(toDTO(domainEntity.getPassengers()));
@@ -191,5 +192,15 @@ public class BookingService extends AbstractCrudService<BookingRequest, BookingR
         responses.add(response);
     }
     return responses;
+  }
+  private UserResponse toDTO(User user) {
+    UserResponse response = new UserResponse();
+      response.setUserId(user.getUserId());
+      response.setUsername(user.getUsername());
+      response.setEmail(user.getEmail());
+      response.setFirstName(user.getFirstName());
+      response.setLastName(user.getLastName());
+      response.setPhoneNumber(user.getPhoneNumber());
+    return response;
   }
 }

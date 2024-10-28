@@ -36,6 +36,10 @@ public class FlightController {
     public FlightResponse findById(@PathVariable Long id){
         return service.findById(id);
     }
+    @GetMapping
+    public List<FlightResponse> getFlight(){
+        return service.findAll();
+    }
     @PutMapping("/{id}")
     public FlightResponse updateById(@PathVariable Long id, @RequestBody FlightRequest request){
         return service.update(id,request);

@@ -13,6 +13,9 @@ import com.example.flight_reservation.repository.FlightRepository;
 import com.example.flight_reservation.service.AbstractCrudService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class FlightService extends AbstractCrudService<FlightRequest, FlightResponse, FlightRepository, Flight,Long> implements IFlightService {
     private final AircraftRepository aircraftRepository;

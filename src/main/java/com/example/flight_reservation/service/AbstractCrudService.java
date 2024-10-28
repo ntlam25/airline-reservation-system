@@ -2,6 +2,9 @@ package com.example.flight_reservation.service;
 
 import com.example.flight_reservation.exception.ResourceNotFoundException;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class AbstractCrudService<Q,R,RP extends JpaRepository<D,I>,D,I> implements BaseCRUDService<Q,R,D,I> {
@@ -43,4 +46,10 @@ public abstract class AbstractCrudService<Q,R,RP extends JpaRepository<D,I>,D,I>
     repository.delete(domainEntity);
   }
   protected abstract R toResponse(D domainEntity);
+  @Override
+  public List<R> findAll() {
+    return repository.findAll().stream()
+            .map(this::toResponse)
+            .collect(Collectors.toList());
+  }
 }

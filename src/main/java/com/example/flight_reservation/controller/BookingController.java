@@ -3,6 +3,7 @@ package com.example.flight_reservation.controller;
 import com.example.flight_reservation.dto.request.BookingRequest;
 import com.example.flight_reservation.dto.request.SearchRequest;
 import com.example.flight_reservation.dto.response.BookingResponse;
+import com.example.flight_reservation.dto.response.FlightResponse;
 import com.example.flight_reservation.dto.response.VNPayResponse;
 import com.example.flight_reservation.entity.Booking;
 import com.example.flight_reservation.repository.BookingRepository;
@@ -42,6 +43,10 @@ public class BookingController {
   public ResponseEntity<BookingResponse> findById(@PathVariable Long bookingId) {
     BookingResponse response = service.findById(bookingId);
     return ResponseEntity.ok(response);
+  }
+  @GetMapping
+  public List<BookingResponse> getBookings(){
+    return service.findAll();
   }
   @PostMapping("/filter")
   public List<Booking> findFlightBySpecification(@RequestBody SearchRequest request){
