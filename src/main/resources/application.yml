@@ -15,7 +15,8 @@ app:
       url: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
       tmnCode: D0N8LZE2
       secretKey: KRBJLJWWYW5EFI9S30DYGBXUNSK851U9
-      returnUrl: http://localhost:8080/api/vnpay/vnpay-callback
+      #      returnUrl: http://localhost:8080/api/vnpay/vnpay-callback
+      returnUrl: http://localhost:3000/success
       version: 2.1.0
       command: pay
       orderType: airline

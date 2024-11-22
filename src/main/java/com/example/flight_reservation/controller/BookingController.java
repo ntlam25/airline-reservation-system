@@ -34,7 +34,7 @@ public class BookingController {
   @PostMapping("/add")
   public ResponseEntity<VNPayResponse> create(@RequestBody BookingRequest bookingRequest) {
     BookingResponse response = service.create(bookingRequest);
-    VNPayResponse vnPayResponse = service.createPaymentUrl(response);
+    VNPayResponse vnPayResponse = service.createPaymentUrl(response.getBookingId());
     return new ResponseEntity<>(vnPayResponse, HttpStatus.CREATED);
   }
 

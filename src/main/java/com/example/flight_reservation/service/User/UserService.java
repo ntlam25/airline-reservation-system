@@ -60,9 +60,13 @@ public class UserService extends AbstractCrudService<UserRequest, UserResponse, 
         response.setFirstName(domainEntity.getFirstName());
         response.setLastName(domainEntity.getLastName());
         response.setUsername(domainEntity.getUsername());
-        response.setRole(domainEntity.getRole());
         response.setPhoneNumber(domainEntity.getPhoneNumber());
         return response;
+    }
+
+    @Override
+    public UserResponse findUserByEmail(String email) {
+        return toResponse(repository.findUserByEmail(email));
     }
 
     @Override
