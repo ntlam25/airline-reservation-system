@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class BookingResponse {
   private Long bookingId;
-  private Long userId;
+  private UserResponse user;
   private Long flightId;
   private BookingStatus status;
   private Long totalPrice;

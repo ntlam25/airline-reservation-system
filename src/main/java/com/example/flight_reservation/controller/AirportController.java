@@ -36,7 +36,7 @@ public class AirportController {
     return service.findById(id);
   }
   @GetMapping
-  public List<AirportResponse> findAll(){
+  public List<AirportResponse> getAirports(){
     return service.findAll();
   }
   @PutMapping("/{id}")

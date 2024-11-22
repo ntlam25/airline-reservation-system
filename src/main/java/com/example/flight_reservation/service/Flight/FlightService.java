@@ -13,6 +13,7 @@ import com.example.flight_reservation.repository.FlightRepository;
 import com.example.flight_reservation.service.AbstractCrudService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
