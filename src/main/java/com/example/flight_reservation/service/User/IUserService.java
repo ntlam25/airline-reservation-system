@@ -7,4 +7,5 @@ import com.example.flight_reservation.service.BaseCRUDService;
 
 public interface IUserService extends BaseCRUDService<UserRequest, UserResponse, User,Long> {
     UserResponse findUserByEmail(String email);
+    String verify(UserRequest user);
 }

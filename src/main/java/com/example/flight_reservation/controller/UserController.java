@@ -20,12 +20,10 @@ public class UserController {
     public ResponseEntity<UserResponse> create(@RequestBody UserRequest request){
         return new ResponseEntity<>(service.create(request), HttpStatus.CREATED);
     }
-
     @GetMapping("/{id}")
     public UserResponse findById(@PathVariable Long id){
         return service.findById(id);
     }
-
     @GetMapping("/search")
     public UserResponse findByEmail(@RequestParam String email){
         return service.findUserByEmail(email);

@@ -94,7 +94,6 @@ public class BookingService extends AbstractCrudService<BookingRequest, BookingR
       passenger.setPassportNumber(passengerRequest.getPassportNumber());
       passenger.setDateOfBirth(passengerRequest.getDateOfBirth());
       passenger.setSeatClass(passengerRequest.getSeatClass());
-
       booking.addPassenger(passenger);
     }
 
