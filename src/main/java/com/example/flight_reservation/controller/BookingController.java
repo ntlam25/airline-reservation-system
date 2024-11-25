@@ -44,7 +44,7 @@ public class BookingController {
     BookingResponse response = service.findById(bookingId);
     return ResponseEntity.ok(response);
   }
-  @GetMapping
+  @GetMapping("/all")
   public List<BookingResponse> getBookings(){
     return service.findAll();
   }

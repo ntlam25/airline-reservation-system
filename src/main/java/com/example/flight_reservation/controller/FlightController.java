@@ -13,9 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/flights")
+
 public class FlightController {
     private final IFlightService service;
     private final FilterService<Flight> filterService;
@@ -36,7 +36,7 @@ public class FlightController {
     public FlightResponse findById(@PathVariable Long id){
         return service.findById(id);
     }
-    @GetMapping
+    @GetMapping("/all")
     public List<FlightResponse> getFlight(){
         return service.findAll();
     }
