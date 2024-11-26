@@ -27,7 +27,7 @@ public class AirlineController {
     public AirlineResponse findById(@PathVariable Long id){
         return service.findById(id);
     }
-    @GetMapping
+    @GetMapping("/all")
     public List<AirlineResponse> getAirline(){
         return service.findAll();
     }

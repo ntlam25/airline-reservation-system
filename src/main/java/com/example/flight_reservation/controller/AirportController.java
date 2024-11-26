@@ -35,7 +35,7 @@ public class AirportController {
   public AirportResponse findById(@PathVariable Long id){
     return service.findById(id);
   }
-  @GetMapping
+  @GetMapping("/all")
   public List<AirportResponse> getAirports(){
     return service.findAll();
   }

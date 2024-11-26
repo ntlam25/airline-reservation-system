@@ -28,7 +28,7 @@ public class AircraftController {
     public AircraftResponse findById(@PathVariable Long id){
         return service.findById(id);
     }
-    @GetMapping
+    @GetMapping("/all")
     public List<AircraftResponse> getAircrafts(){
         return service.findAll();
     }

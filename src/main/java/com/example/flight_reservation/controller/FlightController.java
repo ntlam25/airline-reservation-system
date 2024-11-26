@@ -36,7 +36,7 @@ public class FlightController {
     public FlightResponse findById(@PathVariable Long id){
         return service.findById(id);
     }
-    @GetMapping
+    @GetMapping("/all")
     public List<FlightResponse> getFlight(){
         return service.findAll();
     }
