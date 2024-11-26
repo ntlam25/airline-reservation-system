@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -27,6 +29,10 @@ public class UserController {
     @GetMapping("/search")
     public UserResponse findByEmail(@RequestParam String email){
         return service.findUserByEmail(email);
+    }
+    @GetMapping("/all")
+    public List<UserResponse> getUsers(){
+        return service.findAll();
     }
     @PutMapping("/{id}")
     public UserResponse updateById(@PathVariable Long id, @RequestBody UserRequest request){
