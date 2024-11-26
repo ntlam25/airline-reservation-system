@@ -204,7 +204,7 @@ public class BookingService extends AbstractCrudService<BookingRequest, BookingR
   }
   private UserResponse toDTO(User user) {
     UserResponse response = new UserResponse();
-      response.setUserId(user.getUserId());
+      response.setId(user.getUserId());
       response.setUsername(user.getUsername());
       response.setEmail(user.getEmail());
       response.setFirstName(user.getFirstName());
