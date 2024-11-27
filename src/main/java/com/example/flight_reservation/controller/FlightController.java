@@ -10,6 +10,7 @@ import com.example.flight_reservation.service.Flight.IFlightService;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,6 +58,7 @@ public class FlightController {
                 .getSearchSpecification(request.getSearchDetailRequest(),request.getGlobalOperator());
         return repository.findAll(responseSpecification);
     }
+
     @GetMapping("/search")
     public ResponseEntity<List<FlightResponse>> searchFlights(
             @RequestParam String depAirport,

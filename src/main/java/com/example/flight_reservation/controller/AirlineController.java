@@ -6,6 +6,7 @@ import com.example.flight_reservation.dto.response.FlightResponse;
 import com.example.flight_reservation.service.Airline.IAirlineService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
