@@ -18,8 +18,8 @@ public class AirlineService extends AbstractCrudService<AirlineRequest, AirlineR
     @Override
     protected Airline createAndSave(AirlineRequest request) {
         Airline airline = new Airline();
-        airline.setName(airline.getName());
-        airline.setCode(airline.getCode());
+        airline.setName(request.getName());
+        airline.setCode(request.getCode());
         return repository.save(airline);
     }
 

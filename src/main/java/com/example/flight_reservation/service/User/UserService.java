@@ -37,7 +37,7 @@ public class UserService extends AbstractCrudService<UserRequest, UserResponse, 
         user.setFirstName(request.getFirstName());
         user.setPasswordHash(encoder.encode(request.getPassword()));
         user.setPhoneNumber(request.getPhoneNumber());
-        user.setRole(UserRole.CUSTOMER);
+        user.setRole(request.getRole());
         return repository.save(user);
     }
 
@@ -61,6 +61,7 @@ public class UserService extends AbstractCrudService<UserRequest, UserResponse, 
         response.setLastName(domainEntity.getLastName());
         response.setUsername(domainEntity.getUsername());
         response.setPhoneNumber(domainEntity.getPhoneNumber());
+        response.setRole(domainEntity.getRole());
         return response;
     }
 
