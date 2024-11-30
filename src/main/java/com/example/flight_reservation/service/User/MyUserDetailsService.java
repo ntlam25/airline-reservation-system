@@ -1,7 +1,6 @@
 package com.example.flight_reservation.service.User;
 
 import com.example.flight_reservation.entity.User;
-import com.example.flight_reservation.entity.UserPrincipal;
 import com.example.flight_reservation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

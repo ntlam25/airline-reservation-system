@@ -45,7 +45,8 @@ public class SecurityConfig {
                 .cors().and()
                 .csrf(AbstractHttpConfigurer::disable).
                 authorizeHttpRequests(request -> request
-                        .requestMatchers("login", "register").permitAll()
+                        .requestMatchers("login", "register","/api/users/add").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/api/users/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/aircraft/","/api/airlines/","/api/airports/","/api/bookings/","/api/flights/","/api/users/").hasAnyRole("CUSTOMER","ADMIN")
                         .requestMatchers(HttpMethod.POST,"api/bookings/add","/api/users/add").hasRole("CUSTOMER")
                         .requestMatchers(HttpMethod.POST).hasRole("ADMIN")
@@ -60,7 +61,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000","http://localhost:4000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
         configuration.setExposedHeaders(List.of("x-auth-token"));
