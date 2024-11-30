@@ -45,8 +45,8 @@ public class UserService extends AbstractCrudService<UserRequest, UserResponse, 
     protected User updateAndSave(Long id, UserRequest request) {
         User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not found user with id "+id));
         user.setLastName(request.getLastName());
-        user.setPasswordHash(request.getPassword());
         user.setFirstName(request.getFirstName());
+        user.setPasswordHash(encoder.encode(request.getPassword()));
         user.setPhoneNumber(request.getPhoneNumber());
         return repository.save(user);
     }
